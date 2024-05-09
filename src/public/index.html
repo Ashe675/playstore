@@ -58,7 +58,7 @@
       <div class="container-fluid cards-container">
         <div class="row">
           <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-3 col-sm-4 col-6">
-            <div class="card">
+            <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
               <div class="card__img-container">
                 <img
                   src="img/app-icons/1.webp"
@@ -83,6 +83,42 @@
       </div>
     </main>
     <!-- /.container -->
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="modalApp"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="modalAppLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalAppLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-success">Instalar</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
