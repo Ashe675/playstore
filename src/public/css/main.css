@@ -1,0 +1,107 @@
+:root{
+    --font-primary: "Raleway", sans-serif;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    color: #222;
+    font-family: var(--font-primary);
+}
+
+body{
+    background: radial-gradient(circle, #fff, #ededed);
+    min-height: 100vh;
+}
+
+
+
+.navbar-brand{
+    width: 40%;
+    max-width: 125px;
+}
+
+.logo{
+    width: 100%;
+}
+
+.d-flex{
+    width: 55%;
+    max-width: 300px;
+}
+
+.fa-magnifying-glass{
+    color: #fff;
+}
+
+.container{
+    width: 95%;
+    max-width: 1400px;
+    height: 80%;
+    margin-top: 20px;
+    padding-bottom: 20px
+}
+
+.form-select{
+    outline: none;
+    padding: 5px 9px;
+    color: #676565;
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px #bbbbbb5a;
+}
+
+.form-select:focus{
+    outline: none;
+    box-shadow: 0 0 8px #bbbbbbb7;
+}
+
+.cards-container{
+    margin: 10px 0;
+    padding: 0;
+}
+
+.card-title{
+    font-size: 1.2em;
+}
+.card-text{
+    font-size: 0.8em;
+    height: 2.5em;
+    margin-bottom: 0;
+}
+
+.card__img-container{
+    padding: 10px 10px 0;
+}
+
+.card-body{
+    padding: 10px;
+    padding-top: 5px;
+}
+
+.card-quality{
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.card{
+    border-radius: 3px;
+    box-shadow: 0 0 12px #a8a4a4bf;
+}
+
+.row{
+    row-gap: 20px;
+}
+
+.card:hover{
+    background-color: #18ae68;
+    color: #fff;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.card:hover .card-text,.card:hover .fa-star{
+    color: #fff;
+}
+
