@@ -1,8 +1,17 @@
 //El siguiente código es el encargado de generar la informaación de prueba.
-
+const categoryFilter = document.getElementById('category-filter');
+const AppsContainer = document.getElementById('apps-container');
+let contadorApps = 1;
 let categorias = [];
+let categorySelected = {};
+let indexCategorySelected = -1;
 
-const getCategories = () => {
+getCategories();
+fillSelectFilter();
+renderApps();
+console.log(categorias);
+
+function getCategories(){
   for (let i = 0; i < 5; i++) {
     let nameCategory = "Categoria " + i;
     if (localStorage.getItem(nameCategory) == null) {
@@ -14,7 +23,7 @@ const getCategories = () => {
   }
 };
 
-const generateCategory = (number) => {
+function generateCategory(number){
   console.log('Generando categoria ' + number)
   //Este arreglo es para generar textos de prueba
   let textosDePrueba = [
@@ -25,7 +34,6 @@ const generateCategory = (number) => {
     "Ducimus, repellendus voluptate quo veritatis tempora recusandae dolorem optio illum.",
   ];
 
-  let contador = 1;
   //Generar 1 categoria
   let categoria = {
     nombreCategoria: "Categoria " + number,
@@ -36,15 +44,15 @@ const generateCategory = (number) => {
   for (let j = 0; j < 10; j++) {
     //Generar 10 apps por categoria
     let aplicacion = {
-      codigo: contador,
-      nombre: "App " + contador,
+      codigo: contadorApps,
+      nombre: "App " + (contadorApps),
       descripcion: textosDePrueba[Math.floor(Math.random() * (5 - 1))],
-      icono: `img/app-icons/${contador}.webp`,
-      instalada: contador % 3 == 0 ? true : false,
+      icono: `img/app-icons/${contadorApps}.webp`,
+      instalada: contadorApps % 3 == 0 ? true : false,
       app: "app/demo.apk",
       calificacion: Math.floor(Math.random() * (5 - 1)) + 1,
       descargas: 1000,
-      desarrollador: `Desarrollador ${(number +1) * (j + 1)}`,
+      desarrollador: `Desarrollador ${(number +1) * (contadorApps)}`,
       imagenes: [
         "img/app-screenshots/1.webp",
         "img/app-screenshots/2.webp",
@@ -71,13 +79,96 @@ const generateCategory = (number) => {
         },
       ],
     };
-    contador++;
+    contadorApps++;
     categoria.aplicaciones.push(aplicacion);
   }
   localStorage.setItem(categoria.nombreCategoria, JSON.stringify(categoria));
   categorias.push(categoria);
 };
 
-getCategories();
-console.log(categorias);
+function fillSelectFilter(){
+  let HTMLCode = ''
+  let cont = 0;
+  categorias.forEach(categoria =>{
+    HTMLCode += `
+    <option value="${cont}">${categoria.nombreCategoria}</option>
+    `
+    cont++;
+  });
+  categoryFilter.innerHTML += HTMLCode;
+}
 
+function renderApps(){
+  AppsContainer.innerHTML = '';
+  let HTMLCode = ``;
+  if(indexCategorySelected < 0 || indexCategorySelected > categorias.length || !indexCategorySelected){
+    categorias.forEach(categoria =>{
+      categoria.aplicaciones.forEach(app=>{
+        HTMLCode += `
+        <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+        <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
+          <div class="card__img-container">
+            <img
+              src="${app.icono}"
+              class="card-img-top"
+              alt="logo app"
+            />
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">${app.nombre}</h5>
+            <p class="card-text">${app.desarrollador}</p>
+            <p class="card-quality">
+              ${generateStars(app.calificacion)}
+            </p>
+          </div>
+        </div>
+      </div>
+        `
+      });
+    });
+  }else{
+    categorySelected.aplicaciones.forEach(app=>{
+      HTMLCode += `
+      <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
+      <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
+        <div class="card__img-container">
+          <img
+            src="${app.icono}"
+            class="card-img-top"
+            alt="logo app"
+          />
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">${app.nombre}</h5>
+          <p class="card-text">${app.desarrollador}</p>
+          <p class="card-quality">
+            ${generateStars(app.calificacion)}
+          </p>
+        </div>
+      </div>
+    </div>
+      `
+    });
+  }
+  AppsContainer.innerHTML += HTMLCode;
+}
+
+function generateStars(calificacion){
+  let HTMLCode = ``;
+  for (let i = 0; i < calificacion; i++) {
+    HTMLCode += `<i class="fa-solid fa-star"></i>`
+  }
+  for (let i = 0; i < (5 - calificacion); i++) {
+    HTMLCode += `<i class="fa-regular fa-star"></i>`
+  }
+  return HTMLCode;
+}
+
+categoryFilter.addEventListener('change',changeCategory);
+
+function changeCategory(){
+  indexCategorySelected = this.value;
+  categorySelected = categorias[indexCategorySelected];
+  console.log(categorySelected);
+  renderApps();
+}

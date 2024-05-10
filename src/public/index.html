@@ -49,36 +49,12 @@
     </nav>
 
     <main role="main" class="container">
-      <select class="form-select" aria-label="Default select example">
-        <option selected value="0">Seleccione una categoría</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select id="category-filter" class="form-select" aria-label="Default select example">
+        <option selected value="-1">Todas las apps</option>
       </select>
       <div class="container-fluid cards-container">
-        <div class="row">
-          <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-            <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
-              <div class="card__img-container">
-                <img
-                  src="img/app-icons/1.webp"
-                  class="card-img-top"
-                  alt="logo app"
-                />
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Desarrollador 2</p>
-                <p class="card-quality">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-regular fa-star"></i>
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="row" id="apps-container">
+         
         </div>
       </div>
     </main>
