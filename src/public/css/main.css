@@ -105,3 +105,91 @@ body{
     color: #fff;
 }
 
+.card-detail-modal{
+    display: flex;
+}
+
+.item1{
+    padding: 0;
+    padding-bottom: 10px;
+}
+
+.modal-logo-conatiner{
+    width: 30%;
+}
+
+.modal-logo{
+    width: 84%;
+}
+
+.card-modal-info{
+    
+    width: 70%;
+}
+
+.card-text-modal{
+    font-size: .9em;
+    margin-bottom: 0;
+}
+
+.text1{
+    font-size: 1.7em;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.text2{
+    color: #838080;
+    height: auto;
+}
+
+.item2{
+    display: flex;
+    justify-content: center;
+}
+
+.item2 i{
+    color: #18a133;
+    
+}
+
+.btn-instalar{
+    background-color: #18ae68;
+    border-color: #18ae68;
+}
+
+.list-comments{
+    max-height: 140px;
+    overflow-y: auto;
+}
+
+.comment-item{
+    display: flex;
+}
+
+.user-img{
+    display: flex;
+    align-items: center;
+}
+
+.user-img img{
+    border-radius: 50%;
+    margin-right: 20px;
+    
+}
+
+.user-info{
+    margin: 0;
+}
+
+.username{
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.user-comment{
+    margin: 0;
+    font-size: 0.8em;
+    color: #838080;
+}
