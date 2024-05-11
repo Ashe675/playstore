@@ -1,10 +1,21 @@
 //El siguiente código es el encargado de generar la informaación de prueba.
 const categoryFilter = document.getElementById('category-filter');
 const AppsContainer = document.getElementById('apps-container');
+const appNameModal = document.getElementById('app-name-modal');
+const appDevModal = document.getElementById('app-dev-modal');
+const appDescModal = document.getElementById('app-description-modal');
+const appIconModal = document.getElementById('app-icon-modal');
+const appQualifiModal = document.getElementById('app-qualification-modal');
+const appCarouselModal = document.getElementById('app-carousel-modal');
+const appCommentsModal = document.getElementById('app-comments-modal');
+const modalApp = document.getElementById('modalApp');
+
+
 let contadorApps = 1;
 let categorias = [];
 let categorySelected = {};
 let indexCategorySelected = -1;
+let appSelected = {};
 
 getCategories();
 fillSelectFilter();
@@ -106,7 +117,7 @@ function renderApps(){
       categoria.aplicaciones.forEach(app=>{
         HTMLCode += `
         <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-        <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
+        <div class="card app-card" data-id="${app.codigo}">
           <div class="card__img-container">
             <img
               src="${app.icono}"
@@ -130,7 +141,7 @@ function renderApps(){
     categorySelected.aplicaciones.forEach(app=>{
       HTMLCode += `
       <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6">
-      <div class="card" data-bs-toggle="modal" data-bs-target="#modalApp">
+      <div class="card app-card" data-id="${app.codigo}">
         <div class="card__img-container">
           <img
             src="${app.icono}"
@@ -166,9 +177,81 @@ function generateStars(calificacion){
 
 categoryFilter.addEventListener('change',changeCategory);
 
+AppsContainer.addEventListener('click',selectApp);
+
 function changeCategory(){
   indexCategorySelected = this.value;
   categorySelected = categorias[indexCategorySelected];
   console.log(categorySelected);
   renderApps();
+}
+
+function selectApp(e){
+  let element = e.target.closest(".app-card");
+  if(element){
+    let id = parseInt(element.getAttribute('data-id'));
+    findApp(id);
+    if(appSelected){
+      changeInfoModal();
+      showModal();
+    }
+  }
+}
+
+function showModal(){
+  let modalBootstrap = new bootstrap.Modal(modalApp);
+  modalBootstrap.show();
+}
+
+function findApp(id){
+  categorias.find(categoria=>{
+    appSelected = categoria.aplicaciones.find(app=>app.codigo === id);
+    return appSelected
+  });
+}
+
+function changeInfoModal(){
+  appIconModal.src = appSelected.icono;
+  appNameModal.textContent = appSelected.nombre;
+  appDevModal.textContent = appSelected.desarrollador;
+  appDescModal.textContent = appSelected.descripcion;
+  let HTMLCode = '';
+  HTMLCode = generateStars(appSelected.calificacion);
+  appQualifiModal.innerHTML = HTMLCode;
+  if(appSelected.calificacion <= 2){
+    appQualifiModal.classList.add('red');
+    appQualifiModal.classList.remove('item2');
+  }else{
+    appQualifiModal.classList.add('item2');
+    appQualifiModal.classList.remove('red');
+  }
+  HTMLCode = '';
+  for (let i = 0; i < appSelected.imagenes.length; i++) {
+    HTMLCode += 
+    `<div class="carousel-item active">
+    <img
+      src="${appSelected.imagenes[i]}"
+      class="d-block w-100"
+    />
+    </div>`;
+    
+  };
+  appCarouselModal.innerHTML = HTMLCode;
+  HTMLCode = '';
+  appSelected.comentarios.forEach(comment =>{
+    HTMLCode += 
+    `<li class="list-group-item comment-item">
+    <div class="user-img">
+      <img src="img/user.webp" alt="">
+    </div>
+    <div class="user-info">
+      <h6 class="username">${comment.usuario}</h6>
+      <p class="user-comment">
+        ${comment.comentario}
+      </p>
+    </div>
+  </li>`
+  })
+  appCommentsModal.innerHTML = HTMLCode;
+
 }

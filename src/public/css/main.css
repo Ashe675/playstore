@@ -149,8 +149,11 @@ body{
 }
 
 .item2 i{
-    color: #18a133;
-    
+    color: #18a133;   
+}
+
+.red i{
+    color: rgb(195, 3, 3);
 }
 
 .btn-instalar{
