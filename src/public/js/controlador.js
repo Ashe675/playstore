@@ -9,6 +9,8 @@ const appQualifiModal = document.getElementById('app-qualification-modal');
 const appCarouselModal = document.getElementById('app-carousel-modal');
 const appCommentsModal = document.getElementById('app-comments-modal');
 const modalApp = document.getElementById('modalApp');
+const btnInstalar =document.querySelector('.btn-instalar');
+const btnDesinstalar =document.querySelector('.btn-desinstalar');
 
 
 let contadorApps = 1;
@@ -253,5 +255,12 @@ function changeInfoModal(){
   </li>`
   })
   appCommentsModal.innerHTML = HTMLCode;
+  if(appSelected.instalada){
+    btnInstalar.style.display = 'none';
+    btnDesinstalar.style.display = 'inline';
+  }else{
+    btnInstalar.style.display = 'inline';
+    btnDesinstalar.style.display = 'none';
+  }
 
 }

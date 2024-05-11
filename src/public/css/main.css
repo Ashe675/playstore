@@ -19,6 +19,7 @@ body{
 .navbar-brand{
     width: 40%;
     max-width: 125px;
+    
 }
 
 .logo{
@@ -159,6 +160,10 @@ body{
 .btn-instalar{
     background-color: #18ae68;
     border-color: #18ae68;
+}
+
+.btn-instalar, .btn-desinstalar{
+    display: none;
 }
 
 .list-comments{
